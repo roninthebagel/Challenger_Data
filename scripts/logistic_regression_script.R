@@ -108,3 +108,19 @@ emmeans::emmeans(binary_model,
 #__________________________----
 
 # assumptions
+
+# estimating possible overdispersion - using a quasi-likelihood fit
+performance::check_model(binary_model,
+                         residual_type = "normal",
+                         detrend = FALSE)
+
+# fitting a quasibinomial model
+quasibinary_model <- glm(cbind(oring_dt, oring_int) ~ temp, 
+                         family=quasibinomial, # quasilikelihood
+                         data=challenger)
+
+summary(quasibinary_model)
+
+# estimates from the model will not change
+# standard errors will be widened by a fixed dispersion parameter (> 1)
+# this may increase p-values, but here there is no change in interpretation

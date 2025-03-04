@@ -99,3 +99,12 @@ ggsave("figures/failure_probability_temp_plot",
 # challenger launch data
 
 # calculating the probability of failure at a specific temperature
+emmeans::emmeans(binary_model, 
+                 specs = ~ temp, 
+                 at = list(temp = 36),                  
+                 type='response')
+# O-ring failure on the day of the Challenger launch could have been predicted with a probability of 0.91 [91.3%CI: 0.34-99.5]
+
+#__________________________----
+
+# assumptions
